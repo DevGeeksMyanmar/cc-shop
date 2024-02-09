@@ -29,7 +29,7 @@ public class AdminController extends HttpServlet {
         adminDAO = new AdminDAO();
     }
 
-    // post method
+    // post method from lucas branch
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// get the action type
