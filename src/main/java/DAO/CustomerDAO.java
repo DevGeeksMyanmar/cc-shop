@@ -74,19 +74,24 @@ public class CustomerDAO {
 	}
 	
 	// create new customer
-	public boolean create(Customer customer) throws SQLException {
+	public boolean create(Customer customer) {
 		boolean flag = false;
 		String query = "INSERT INTO customers (name, email, password, phone, address, image)"
 				+ "VALUES (?,?,?,?,?,?)";
-		stmt = con.prepareStatement(query);
-		stmt.setString(1, customer.getName());
-		stmt.setString(2, customer.getEmail());
-		stmt.setString(3, customer.getPassword());
-		stmt.setString(4, customer.getPhone());
-		stmt.setString(5, customer.getAddress());
-		stmt.setString(6, customer.getImage());
-		int insertedRow = stmt.executeUpdate();
-		if(insertedRow > 0) flag = true;
+		try {
+			stmt = con.prepareStatement(query);
+			stmt.setString(1, customer.getName());
+			stmt.setString(2, customer.getEmail());
+			stmt.setString(3, customer.getPassword());
+			stmt.setString(4, customer.getPhone());
+			stmt.setString(5, customer.getAddress());
+			stmt.setString(6, customer.getImage());
+			int insertedRow = stmt.executeUpdate();
+			if(insertedRow > 0) flag = true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return flag;
 	}
 	
