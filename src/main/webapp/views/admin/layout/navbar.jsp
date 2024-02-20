@@ -14,17 +14,7 @@
 			</div>
 			<nav class="navbar navbar-header navbar-expand-lg">
 				<div class="container-fluid">
-					
-					<form class="navbar-left navbar-form nav-search mr-md-3" action="">
-						<div class="input-group">
-							<input type="text" placeholder="Search ..." class="form-control">
-							<div class="input-group-append">
-								<span class="input-group-text">
-									<i class="la la-search search-icon "></i>
-								</span>
-							</div>
-						</div>
-					</form>
+				
 					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 						<li class="nav-item dropdown hidden-caret">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -94,20 +84,22 @@
 							</ul>
 						</li>
 						<li class="nav-item dropdown">
-							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="listing.jpg" alt="user-img" width="39" class="img"><span class="text-light" >Hizrian</span></span> </a>
+							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
+							 <img src="${admin.image}" alt="user-img" width="39" class="img"><span class="text-light" >${admin.name}</span></span> 
+							 </a>
 							<ul class="dropdown-menu dropdown-user">
 								<li>
 									<div class="user-box">
-										<div class="u-img"><img src="listing.jpg" alt="user"></div>
+										<div class="u-img"><img src="${admin.image}" alt="user"></div>
 										<div class="u-text">
-											<h4 class="">Hizrian</h4>
-											<p class="text-muted">hello@themekita.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+											<h4 class="">${admin.name}</h4>
+											<p class="text-muted">${admin.email}</p><a href="${pageContext.request.contextPath}/AdminController?page=profile&admin_id=${admin.id}" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
 										</div>
 									</li>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="#"><i class="las la-envelope"></i> Inbox</a>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item text-danger" href="#"><i class="las la-power-off "></i> Logout</a>
+									<a class="dropdown-item text-danger" href="${pageContext.request.contextPath}/LoginController?page=adminLogout"><i class="las la-power-off "></i> Logout</a>
 								</ul>
 								<!-- /.dropdown-user -->
 							</li>

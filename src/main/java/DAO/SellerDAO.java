@@ -10,6 +10,7 @@ public class SellerDAO {
 	Statement statement = null;
 	PreparedStatement stmt = null;
 	ResultSet resultset = null;
+	private int noOfRecords;
 	
 	// default constructor
 	public SellerDAO() throws ClassNotFoundException, SQLException {
@@ -43,10 +44,43 @@ public class SellerDAO {
 		return sellers;
 	}
 	
+	// get all seller
+	public List<Seller> getAll(int offset, int noOfRecords) throws SQLException{
+		List<Seller> sellers = new ArrayList<Seller>();  // create empty admin list to store admins
+		Seller seller = null; // create admin object which is from model
+		String query = "select SQL_CALC_FOUND_ROWS sellers.*, businesses.name as bname FROM sellers LEFT JOIN businesses ON sellers.business_id = businesses.id ORDER BY updated_at DESC limit " + offset + ", " + noOfRecords;
+		statement = con.createStatement();
+		resultset = statement.executeQuery(query);
+		while(resultset.next()) {
+			seller = new Seller();
+			seller.setId(resultset.getInt("id"));
+			seller.setName(resultset.getString("name"));
+			seller.setEmail(resultset.getString("email"));
+			seller.setPhone(resultset.getString("phone"));
+			seller.setImage(resultset.getString("image"));
+			seller.setAddress(resultset.getString("address"));
+			seller.setCompany(resultset.getString("company"));
+			seller.setBusiness_id(resultset.getInt("business_id"));
+			seller.setBname(resultset.getString("bname"));
+			sellers.add(seller);
+		}
+		resultset.close();
+		resultset = statement.executeQuery("SELECT FOUND_ROWS()");
+        if(resultset.next()) {
+        	 this.noOfRecords = resultset.getInt(1);
+        }
+		return sellers; // return that list
+	}
+	
+	// get number of records
+		public int getNoOfRecords() {
+	        return noOfRecords;
+	    }
+	
 	// get by customer id
 	public Seller getById(int id) throws SQLException {
 		Seller seller = new Seller();
-		String query = "SELECT * FROM sellers WHERE id=" + id;
+		String query = "SELECT sellers.*, businesses.name as business FROM sellers LEFT JOIN businesses ON sellers.business_id = businesses.id WHERE sellers.id=" + id;
 		statement = con.createStatement();
 		resultset = statement.executeQuery(query);
 		if(resultset.next()) {
@@ -56,19 +90,20 @@ public class SellerDAO {
 			seller.setPhone(resultset.getString("phone"));
 			seller.setAddress(resultset.getString("address"));
 			seller.setCompany(resultset.getString("company"));
-			seller.setBusiness_id(resultset.getInt("business"));
+			seller.setBname(resultset.getString("business"));
 		}
 		return seller;
 	}
 	
 	// get by email
 		public Seller getSellerByEmail(String email) throws SQLException {
-			Seller seller = new Seller();
+			Seller seller = null;
 			String query = "SELECT * FROM sellers WHERE email=?";
 			stmt = con.prepareStatement(query);
 			stmt.setString(1, email);
 			resultset = stmt.executeQuery();
 			while(resultset.next()) {
+				seller = new Seller();
 				seller.setId(resultset.getInt("id"));
 				seller.setName(resultset.getString("name"));
 				seller.setEmail(resultset.getString("email"));

@@ -3,6 +3,7 @@ package DAO;
 import java.util.*;
 import java.sql.*;
 import Models.Admin;
+import Models.Business;
 
 public class AdminDAO {
 	
@@ -10,6 +11,7 @@ public class AdminDAO {
 	ResultSet resultset = null; // declare result set
 	Statement statement = null; // declare statement
 	PreparedStatement stmt = null; // declare prepare statement
+	private int noOfRecords;
 	
 	// admin data access object model ( constructor work first)
 	public AdminDAO() throws ClassNotFoundException, SQLException{
@@ -41,6 +43,35 @@ public class AdminDAO {
 		return admins; // return that list
 	}
 	
+	// get all admin
+			public List<Admin> getAll(int offset, int noOfRecords) throws SQLException{
+				List<Admin> admins = new ArrayList<Admin>();  // create empty admin list to store admins
+				Admin admin = null; // create admin object which is from model
+				String query = "select SQL_CALC_FOUND_ROWS * from admin ORDER BY updated_at DESC limit " + offset + ", " + noOfRecords;
+				statement = con.createStatement(); // create statement
+				resultset = statement.executeQuery(query); // execute that query and store that into resultset variable
+				while(resultset.next()) {  // until end
+					admin = new Admin(); // create admin object
+					admin.setId(resultset.getInt("id"));  // set admin id from admin table's data
+					admin.setName(resultset.getString("name"));
+					admin.setEmail(resultset.getString("email"));
+					admin.setPhone(resultset.getString("phone"));
+					admin.setImage(resultset.getString("image"));
+					admins.add(admin);
+				}
+				resultset.close();
+				resultset = statement.executeQuery("SELECT FOUND_ROWS()");
+		        if(resultset.next()) {
+		        	 this.noOfRecords = resultset.getInt(1);
+		        }
+				return admins; // return that list
+			}
+			
+			// get number of records
+			public int getNoOfRecords() {
+		        return noOfRecords;
+		    }
+	
 	// get by id
 	public Admin getById(int id) {
 		Admin admin = new Admin();
@@ -55,6 +86,7 @@ public class AdminDAO {
 				admin.setEmail(resultset.getString("email"));
 				admin.setPhone(resultset.getString("phone"));
 				admin.setImage(resultset.getString("image"));
+				admin.setPassword(resultset.getString("password"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -97,12 +129,13 @@ public class AdminDAO {
 	
 	// get by email
 	public Admin getAdminByEmail(String email) throws SQLException {
-		Admin admin = new Admin();
+		Admin admin = null;
 		String query = "SELECT * FROM admin WHERE email=?";
 		stmt = con.prepareStatement(query);
 		stmt.setString(1, email);
 		resultset = stmt.executeQuery();
 		while(resultset.next()) {
+			admin = new Admin();
 			admin.setEmail(resultset.getString("email"));
 			admin.setId(resultset.getInt("id"));
 			admin.setName(resultset.getString("name"));
@@ -133,6 +166,18 @@ public class AdminDAO {
 		stmt.setString(2, admin.getEmail());
 		stmt.setString(3, admin.getPhone());
 		stmt.setInt(4, admin.getId());
+		int updatedRow = stmt.executeUpdate();
+		if(updatedRow > 0) flag = true;
+		return flag;
+	}
+	
+	// update password
+	public boolean updatePassword(String password, int id) throws SQLException {
+		boolean flag = false;
+		String query = "UPDATE admin SET password=? WHERE id=?";
+		stmt = con.prepareStatement(query);
+		stmt.setString(1, password);
+		stmt.setInt(2, id);
 		int updatedRow = stmt.executeUpdate();
 		if(updatedRow > 0) flag = true;
 		return flag;

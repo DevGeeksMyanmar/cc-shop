@@ -8,7 +8,10 @@ public class config {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection con = null;
 		try {
+
 			con = DriverManager.getConnection("jdbc:mysql://localhost/shop_dot_com", "root", "20040224");
+
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

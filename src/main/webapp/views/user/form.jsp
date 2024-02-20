@@ -21,8 +21,6 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 	</head>
-	
-		
 	<style>
 	
 	select {
@@ -51,7 +49,7 @@
     <div class="box">
  
        <div class="title">LOGIN</div>
- 		<form action="${pageContext.request.contextPath}/loginUser" method="post">
+ 		<form action="${pageContext.request.contextPath}/LoginController?page=userLogin" method="post">
  			<input type="hidden" name="action" value="login">
 	       <div class="input">
 	        <label for="email">Email</label>
@@ -74,7 +72,7 @@
     <div class="overbox">
        <div class="material-button alt-2"><span class="shape"></span></div>
        <div class="title">REGISTER</div>
- 		<form action="${pageContext.request.contextPath}/AdminController" method="post">
+ 		<form action="${pageContext.request.contextPath}/RegisterController?page=userRegister" method="post">
  			<input type="hidden" name="action" value="register">
 	       <div class="input">
 	          <label for="name">Username</label>
@@ -114,6 +112,12 @@
  
  </div>
 
+	<c:if test="${!empty error}">
+    <div class="alert alert-warning d-flex justify-content-between"  role="alert">
+  		${error}
+  		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+	</c:if>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/admin/login.js"></script>

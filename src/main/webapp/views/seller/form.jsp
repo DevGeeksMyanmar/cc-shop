@@ -50,7 +50,7 @@
     <div class="box">
  
        <div class="title">LOGIN as Seller</div>
- 		<form action="${pageContext.request.contextPath}/AdminController" method="post">
+ 		<form action="${pageContext.request.contextPath}/LoginController?page=sellerLogin" method="post">
  			<input type="hidden" name="action" value="login">
 	       <div class="input">
 	        <label for="email">Email</label>
@@ -73,7 +73,7 @@
     <div class="overbox">
        <div class="material-button alt-2"><span class="shape"></span></div>
        <div class="title">REGISTER as Seller</div>
- 		<form action="${pageContext.request.contextPath}/registerSeller" method="post">
+ 		<form action="${pageContext.request.contextPath}/RegisterController?page=sellerRegister" method="post">
  			<input type="hidden" name="action" value="register">
 	       <div class="input">
 	          <label for="name">Username</label>
@@ -127,6 +127,13 @@
     </div>
  
  </div>
+ 
+ <c:if test="${!empty error}">
+    <div class="alert alert-warning d-flex justify-content-between"  role="alert">
+  		${error}
+  		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+	</c:if>
 
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

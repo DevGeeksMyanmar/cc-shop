@@ -7,12 +7,12 @@
 				<div class="scrollbar-inner sidebar-wrapper">
 					<div class="user">
 						<div class="photo">
-							<img src="listing.jpg">
+							<img src="${admin.image}">
 						</div>
 						<div class="info">
 							<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
-									Hizrian
+									${admin.name}
 									<span class="user-level ">Administrator</span>
 								</span>
 							</a>
@@ -21,13 +21,13 @@
 						</div>
 					</div>
 					<ul class="nav">
-						<li class="nav-item <c:if test="${request.getRequestURI() eq 'http://localhost:9095/shop-dot-com/views/admin/dashboard.jsp'}">active</c:if>">
+						<li class="nav-item <c:if test="${request.getRequestURI() eq 'http://localhost:8080/shop-dot-com/views/admin/dashboard.jsp'}">active</c:if>">
 							<a href="${pageContext.request.contextPath}/AdminController?page=dashboard">
 								<i class="la la-dashboard"></i>
 								<p>Dashboard</p>
 							</a>
 						</li>
-						<li class="nav-item <c:if test="${request.getRequestURI() eq '/shop-dot-com/views/admin/user/list.jsp'}">active</c:if>">
+						<li class="nav-item <c:if test="${request.getRequestURI() eq '/AdminController?page=user'}">active</c:if>">
 							<a href="${pageContext.request.contextPath}/AdminController?page=user">
 								<i class="la la-user"></i>
 								<p>Users</p>
@@ -66,7 +66,7 @@
 							<a href="${pageContext.request.contextPath}/AdminController?page=business">
 								<i class="las la-building"></i>
 								<p>Business</p>
-								<span class="badge badge-count">${counts.category_count}</span>
+								<span class="badge badge-count">${counts.business_count}</span>
 							</a>
 						</li>
 						<li class="nva-item d-flex align-items-center justify-content-center">

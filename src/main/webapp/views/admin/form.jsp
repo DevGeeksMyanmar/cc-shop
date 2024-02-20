@@ -29,7 +29,7 @@
     <div class="box">
  
        <div class="title">LOGIN as Admin</div>
- 		<form action="${pageContext.request.contextPath}/loginAdmin" method="post">
+ 		<form action="${pageContext.request.contextPath}/LoginController?page=adminLogin" method="post">
  			<input type="hidden" name="action" value="login">
 	       <div class="input">
 	        <label for="email">Email</label>
@@ -52,7 +52,7 @@
     <div class="overbox">
        <div class="material-button alt-2"><span class="shape"></span></div>
        <div class="title">REGISTER as Admin</div>
- 		<form action="${pageContext.request.contextPath}/AdminController" method="post">
+ 		<form action="${pageContext.request.contextPath}/RegisterController?page=adminRegister" method="post">
  			<input type="hidden" name="action" value="register">
 	       <div class="input">
 	          <label for="name">Username</label>
@@ -60,8 +60,8 @@
 	          <span class="spin"></span>
 	       </div>
 	       <div class="input">
-		        <label for="email">Email</label>
-		        <input type="email" name="email" id="email">
+		        <label for="emails">Email</label>
+		        <input type="email" name="email" id="emails">
 		        <span class="spin"></span>
 	     	</div>
 	     	<div class="input">
@@ -70,8 +70,8 @@
 		        <span class="spin"></span>
 		     </div>
 	       <div class="input">
-	          <label for="password">Password</label>
-	          <input type="password" name="password" id="password">
+	          <label for="passwords">Password</label>
+	          <input type="password" name="password" id="passwords">
 	          <span class="spin"></span>
 	       </div>
 	       <div class="input">
@@ -84,8 +84,17 @@
 	       </div>
        </form>
     </div>
+    
+    
  
  </div>
+ 
+ 	<c:if test="${not empty error}">
+    <div class="alert alert-warning d-flex justify-content-between offset-9 w-25"  role="alert">
+  		${error}
+  		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+	</c:if>
 
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

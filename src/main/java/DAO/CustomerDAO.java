@@ -10,6 +10,7 @@ public class CustomerDAO {
 	Statement statement = null;
 	PreparedStatement stmt = null;
 	ResultSet resultset = null;
+	private int noOfRecords;
 	
 	// default constructor
 	public CustomerDAO() throws ClassNotFoundException, SQLException {
@@ -39,6 +40,36 @@ public class CustomerDAO {
 		}	
 		return customers;
 	}
+	
+	// get all customer
+				public List<Customer> getAll(int offset, int noOfRecords) throws SQLException{
+					List<Customer> customers = new ArrayList<Customer>();  // create empty admin list to store admins
+					
+					String query = "select SQL_CALC_FOUND_ROWS * from customers ORDER BY updated_at DESC limit " + offset + ", " + noOfRecords;
+					statement = con.createStatement();
+					ResultSet resultSet = statement.executeQuery(query);
+					while(resultSet.next()) {
+						Customer customer = new Customer();
+						customer.setId(resultSet.getInt("id"));
+						customer.setName(resultSet.getString("name"));
+						customer.setEmail(resultSet.getString("email"));
+						customer.setPhone(resultSet.getString("phone"));
+						customer.setImage(resultSet.getString("image"));
+						customer.setAddress(resultSet.getString("address"));
+						customers.add(customer);
+					}
+					resultSet.close();
+					resultSet = statement.executeQuery("SELECT FOUND_ROWS()");
+			        if(resultSet.next()) {
+			        	 this.noOfRecords = resultSet.getInt(1);
+			        }
+					return customers; // return that list
+				}
+				
+				// get number of records
+				public int getNoOfRecords() {
+			        return noOfRecords;
+			    }
 	
 	// get by customer id
 	public Customer getById(int id) throws SQLException {
@@ -97,12 +128,13 @@ public class CustomerDAO {
 	
 	// get by email
 			public Customer getUserByEmail(String email) throws SQLException {
-				Customer customer = new Customer();
+				Customer customer = null;
 				String query = "SELECT * FROM customers WHERE email=?";
 				stmt = con.prepareStatement(query);
 				stmt.setString(1, email);
 				resultset = stmt.executeQuery();
 				while(resultset.next()) {
+					customer = new Customer();
 					customer.setId(resultset.getInt("id"));
 					customer.setName(resultset.getString("name"));
 					customer.setEmail(resultset.getString("email"));

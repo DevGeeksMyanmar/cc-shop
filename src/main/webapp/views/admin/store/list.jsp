@@ -22,7 +22,18 @@
 			<div class="main-panel">
 				<div class="content">
 					<div class="container-fluid">
-						<h4 class="page-title">   Sellers</h4>
+						<h4 class="page-title">   Store</h4>
+
+						<c:if test="${not empty success }">
+						<div class="alert alert-success text-center " role="alert" id="errorAlert">
+							${success}
+						</div>
+						</c:if>
+						<c:if test="${not empty error }">
+						<div class="alert alert-error text-center " role="alert" id="errorAlert">
+							${error}
+						</div>
+						</c:if>
 
                         <!-- Content goes here  -->
                         <div class="row">
@@ -73,12 +84,16 @@
 															<td>${seller.email}</td>
 															<td class="td-actions">
 																<div class="form-button-action">
+																	<a href="${pageContext.request.contextPath}/AdminController?action=storeDetail&seller_id=${seller.id}">
 																	<button type="button" data-toggle="tooltip" title="See Detail" class="btn btn-link btn-simple-primary">
 																		<i class="las la-eye"></i>
 																	</button>
+																	</a>
+																	<a href="${pageContext.request.contextPath}/AdminController?action=deleteStore&store_id=${seller.id}">
 																	<button type="button" data-toggle="tooltip" title="Remove" class="btn btn-link btn-simple-danger">
 																		<i class="las la-times"></i>
 																	</button>
+																	</a>
 																</div>
 															</td>
 														</tr>
@@ -91,6 +106,26 @@
 												</tbody>
 											</table>
 										</div>
+										<nav aria-label="Page navigation example">
+										  <ul class="pagination">
+										    <c:if test="${currentPage != 1}">
+										        <li class="page-item"><a href="${pageContext.request.contextPath}/AdminController?page=storepage_number=${currentPage - 1}" class="page-link">Previous</a></li>
+											</c:if> 
+										    <c:forEach begin="1" end="${noOfPages}" var="i"> 
+								              <c:choose> 
+								                  <c:when test="${currentPage eq i}"> 
+								                      <li class="page-item"><a class="page-link bg-primary text-light" href="${pageContext.request.contextPath}/AdminController?page=store?page=business&page_number=${i}">${i}</a></td> 
+								                  </c:when> 
+								                  <c:otherwise> 
+								                      <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/AdminController?page=store&page_number=${i}">${i}</a></td> 
+								                  </c:otherwise> 
+								              </c:choose> 
+								          </c:forEach> 
+										    <c:if test="${currentPage lt noOfPages}">
+										        <li class="page-item"><a href="${pageContext.request.contextPath}/AdminController?page=store&page_number=${currentPage + 1}" class="page-link">Next</a></td>
+										    </c:if>
+										  </ul>
+										</nav>
 									</div>
 									
 								</div>
@@ -105,27 +140,21 @@
 		</div>
 	</div>
 
-	<!-- Modal -->
-	<div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="modalUpdatePro" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header bg-primary">
-					<h6 class="modal-title"><i class="la la-frown-o"></i> Under Development</h6>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body text-center">									
-					<p>Currently the pro version of the <b>Ready Dashboard</b> Bootstrap is in progress development</p>
-					<p>
-						<b>We'll let you know when it's done</b></p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
+	<script>
+    // Wait for the document to be ready
+    document.addEventListener('DOMContentLoaded', function() {
+        // Find the success alert element
+        var successAlert = document.getElementById('errorAlert');
+        
+        // If the alert element exists
+        if (successAlert) {
+            // Set a timeout to hide the alert after 3 seconds
+            setTimeout(function() {
+                successAlert.style.display = 'none'; // Hide the alert
+            }, 3000); // 3000 milliseconds = 3 seconds
+        }
+	    });
+	</script>
 
 </body>
 

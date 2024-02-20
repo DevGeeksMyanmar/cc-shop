@@ -40,7 +40,7 @@
                                 <li><a href="${pageContext.request.contextPath}/views/index.jsp#mile">Goals And Milestones</a></li>
                                 <li><a href="${pageContext.request.contextPath}/views/index.jsp#review">Review</a></li>
                                 <li><a href="${pageContext.request.contextPath}/views/index.jsp#contact">Contact</a></li>
-                                <li><a href="${pageContext.request.contextPath}/views/seller/form.jsp" id="business">Business</a></li>
+                                <li><a href="${pageContext.request.contextPath}/RegisterController?page=sellerForm" id="business">Business</a></li>
                                 <li><a href="${pageContext.request.contextPath}/views/user/form.jsp" id="shopnow">Shop Now</a></li>
                             </ul>
 
