@@ -61,6 +61,21 @@ public class BusinessDAO {
 		return businesses;
 	}
 	
+	// get by name
+		public Business getByName(String name) throws SQLException {
+			Business business = null;
+			String query = "SELECT * FROM businesses WHERE name = ?" ;
+			stmt = con.prepareStatement(query);
+			stmt.setString(1, name);
+			resultset = stmt.executeQuery();
+			if(resultset.next()) {
+				business = new Business();
+				business.setId(resultset.getInt("id"));
+				business.setName(resultset.getString("name"));
+			}
+			return business;
+		}
+	
 	// create business
 		public boolean create(Business business)  {
 			boolean flag = false;

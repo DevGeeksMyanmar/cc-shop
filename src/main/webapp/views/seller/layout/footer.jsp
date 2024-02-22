@@ -3,6 +3,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
+<script>
+    // Wait for the document to be ready
+    document.addEventListener('DOMContentLoaded', function() {
+        // Find the success alert element
+        var successAlert = document.getElementById('errorAlert');
+        
+        // If the alert element exists
+        if (successAlert) {
+            // Set a timeout to hide the alert after 3 seconds
+            setTimeout(function() {
+                successAlert.style.display = 'none'; // Hide the alert
+            }, 3000); // 3000 milliseconds = 3 seconds
+        }
+	    });
+	</script>
 
 <script src="${pageContext.request.contextPath}/assets/admin/assets/js/core/jquery.3.2.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/admin/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>

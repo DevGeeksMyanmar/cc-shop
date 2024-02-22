@@ -61,13 +61,24 @@ public class CategoryController extends HttpServlet {
 	private void saveCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 		boolean flag = false;
 		String name = request.getParameter("name");
-		Category newCategory = new Category();
-		newCategory.setName(name);
 		
-		if(categoryDAO.create(newCategory)) {
-			String success = "Added Category Successfully";
-			String encoded = URLEncoder.encode(success, "UTF-8");
-			response.sendRedirect(request.getContextPath() + "/AdminController?page=category&success="+encoded);
+		Category is_duplicated = categoryDAO.getByName(name);
+		
+		if(is_duplicated == null) {
+			Category newCategory = new Category();
+			newCategory.setName(name);
+			
+			if(categoryDAO.create(newCategory)) {
+				String success = "Added Category Successfully";
+				String encoded = URLEncoder.encode(success, "UTF-8");
+				response.sendRedirect(request.getContextPath() + "/AdminController?page=category&success="+encoded);
+			}
+		}else {
+			System.out.println("duplicated");
+			String error = "Name has already taken";
+			String encoded = URLEncoder.encode(error, "UTF-8");
+			response.sendRedirect(request.getContextPath() + "/AdminController?page=category&error="+encoded);
+			return;
 		}
 	}
 	
@@ -75,6 +86,16 @@ public class CategoryController extends HttpServlet {
 	private void updateCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 		String name = request.getParameter("name");
 		String category_id = request.getParameter("category_id");
+		
+		Category is_duplicated = categoryDAO.getByName(name);
+		
+		if(is_duplicated != null && is_duplicated.getId() != Integer.parseInt(category_id)) {
+			String error = "Name has already taken";
+			String encoded = URLEncoder.encode(error, "UTF-8");
+			response.sendRedirect(request.getContextPath() + "/AdminController?page=category&error="+encoded);
+			return;
+		}
+		
 		Category updatedCategory = new Category();
 		updatedCategory.setName(name);
 		if(categoryDAO.update(updatedCategory, Integer.parseInt(category_id))) {

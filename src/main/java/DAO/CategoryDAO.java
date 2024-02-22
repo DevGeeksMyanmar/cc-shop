@@ -76,17 +76,20 @@ public class CategoryDAO {
 	
 	// get by name
 	public Category getByName(String name) throws SQLException {
-		Category category = new Category();
+		Category category = null;
 		String query = "SELECT * FROM categories WHERE name = ?" ;
 		stmt = con.prepareStatement(query);
 		stmt.setString(1, name);
 		resultset = stmt.executeQuery();
 		if(resultset.next()) {
+			category = new Category();
 			category.setId(resultset.getInt("id"));
 			category.setName(resultset.getString("name"));
 		}
 		return category;
 	}
+	
+	
 	
 	// create category
 	public boolean create(Category category) throws SQLException {

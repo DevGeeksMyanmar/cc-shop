@@ -7,7 +7,13 @@
 				<div class="scrollbar-inner sidebar-wrapper">
 					<div class="user">
 						<div class="photo">
-							<img src="${seller.image}">
+						
+									<c:if test="${seller.image == 'assets/images/troll.jpg'}">
+                                		<img class="<c:if test='${seller.image != "assets/images/troll.jpg"}'> d-none </c:if>" src="${seller.image}">
+                                	</c:if>
+                                	<c:if test="${seller.image != null}">
+                                		<img class="<c:if test='${seller.image == "assets/images/troll.jpg"}'> d-none </c:if>" src="${pageContext.request.contextPath}/assets/images/admin/${seller.image}" class="rounded border p-2" style="width: 120px !important; height: 100px !important;">
+                                	</c:if>
 						</div>
 						<div class="info">
 							<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
@@ -28,7 +34,7 @@
 							</a>
 						</li>
 						<li class="nav-item <c:if test="${request.getRequestURI() eq '/SellerController?page=product'}">active</c:if>">
-							<a href="${pageContext.request.contextPath}/SellerController?page=product">
+							<a href="${pageContext.request.contextPath}/SellerController?page=product&seller_id=${seller.id}">
 								<i class="la la-user"></i>
 								<p>Products</p>
 							</a>

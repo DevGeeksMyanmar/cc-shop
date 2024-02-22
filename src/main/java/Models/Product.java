@@ -13,7 +13,14 @@ public class Product {
 	private int seller_id;
 	private String category_name;
 	private String seller_name;
+	private String image;
 	
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
 	public String getCategory_name() {
 		return category_name;
 	}

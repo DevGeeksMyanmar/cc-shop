@@ -81,6 +81,18 @@
                                 <form method="post" action="${pageContext.request.contextPath}/AdminController">
                                 	<input type="hidden" name="action" value="updateProfile" >
                                 	<input type="hidden" name="admin_id" value="${admin.id}" >
+                                	
+                                	<div class="d-flex justify-content-center  align-items-center flex-column">
+                                	<c:if test="${admin.image == 'assets/images/troll.jpg'}">
+                                		<img src="${pageContext.request.contextPath}/assets/images/troll.jpg" class="rounded border p-2 <c:if test='${admin.image != "assets/images/troll.jpg"}'> d-none </c:if>" style="width: 120px !important; height: 100px !important;">
+                                	</c:if>
+                                	<c:if test="${admin.image != null}">
+                                		<img src="${pageContext.request.contextPath}/assets/images/admin/${admin.image}" class="rounded border p-2 <c:if test='${admin.image == "assets/images/troll.jpg"}'> d-none </c:if>" style="width: 120px !important; height: 100px !important;">
+                                	</c:if>
+                                	<input type="file" name="image" class="form-control mt-2" style="width: 120px !important;">
+                                	</div>
+                                	
+                                	
                                 	<div class="form-group">
                                 		<lable class="form-label" for="name">Name</lable>
                                 		<input type="text" name="name" value="${admin.name }" class="form-control">

@@ -30,7 +30,7 @@
 						</div>
 						</c:if>
 						<c:if test="${not empty error }">
-						<div class="alert alert-error text-center " role="alert" id="errorAlert">
+						<div class="alert alert-danger text-center " role="alert" id="errorAlert">
 							${error}
 						</div>
 						</c:if>

@@ -83,9 +83,23 @@ public class CustomerDAO {
 			customer.setEmail(resultset.getString("email"));
 			customer.setPhone(resultset.getString("phone"));
 			customer.setAddress(resultset.getString("address"));
+			customer.setImage(resultset.getString("image"));
+			customer.setPassword(resultset.getString("password"));
 		}
 		return customer;
 	}
+	
+	// update password
+		public boolean updatePassword(String password, int id) throws SQLException {
+			boolean flag = false;
+			String query = "UPDATE customers SET password=? WHERE id=?";
+			stmt = con.prepareStatement(query);
+			stmt.setString(1, password);
+			stmt.setInt(2, id);
+			int updatedRow = stmt.executeUpdate();
+			if(updatedRow > 0) flag = true;
+			return flag;
+		}
 	
 	// get by customer name
 	public Customer getByName(String name) throws SQLException {
@@ -135,6 +149,7 @@ public class CustomerDAO {
 					customer.setEmail(resultset.getString("email"));
 					customer.setPhone(resultset.getString("phone"));
 					customer.setImage(resultset.getString("image"));
+					customer.setAddress(resultset.getString("address"));;
 					customer.setPassword(resultset.getString("password"));
 				}
 				return customer;
@@ -153,14 +168,24 @@ public class CustomerDAO {
 	// update customer
 	public boolean update(Customer customer) throws SQLException {
 		boolean flag = false;
-		String query = "UPDATE customers SET name=?, email=?, phone=?, address=?, image=? WHERE id=?";
+		String query = "UPDATE customers SET name=?, email=?, phone=?, address=? WHERE id=?";
 		stmt = con.prepareStatement(query);
 		stmt.setString(1, customer.getName());
 		stmt.setString(2, customer.getEmail());
 		stmt.setString(3, customer.getPhone());
 		stmt.setString(4, customer.getAddress());
-		stmt.setString(5, customer.getImage());
-		stmt.setInt(6, customer.getId());
+		stmt.setInt(5, customer.getId());
+		int updatedRow = stmt.executeUpdate();
+		if(updatedRow > 0) flag = true;
+		return flag;
+	}
+	
+	public boolean updateImage(Customer customer) throws SQLException {
+		boolean flag = false;
+		String query = "UPDATE customers SET image=? WHERE id=?";
+		stmt = con.prepareStatement(query);
+		stmt.setString(1, customer.getImage());
+		stmt.setInt(2, customer.getId());
 		int updatedRow = stmt.executeUpdate();
 		if(updatedRow > 0) flag = true;
 		return flag;

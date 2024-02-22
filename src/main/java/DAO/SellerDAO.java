@@ -84,7 +84,10 @@ public class SellerDAO {
 	// get by customer id
 	public Seller getById(int id) throws SQLException {
 		Seller seller = new Seller();
-		String query = "SELECT sellers.*, businesses.name as business FROM sellers LEFT JOIN businesses ON sellers.business_id = businesses.id WHERE sellers.id=" + id;
+		String query = "SELECT sellers.*, businesses.name as business, MAX(products.rating) as rating FROM sellers "
+				+ "LEFT JOIN businesses ON sellers.business_id = businesses.id "
+				+ "LEFT JOIN products ON sellers.id = products.seller_id "
+				+ "WHERE sellers.id=" + id;
 		statement = con.createStatement();
 		resultset = statement.executeQuery(query);
 		if(resultset.next()) {
@@ -95,6 +98,8 @@ public class SellerDAO {
 			seller.setAddress(resultset.getString("address"));
 			seller.setCompany(resultset.getString("company"));
 			seller.setBname(resultset.getString("business"));
+			seller.setImage(resultset.getString("image"));
+			seller.setRating(resultset.getInt("rating"));
 		}
 		return seller;
 	}

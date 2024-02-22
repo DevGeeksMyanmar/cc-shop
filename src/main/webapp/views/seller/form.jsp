@@ -39,6 +39,15 @@
 		  font-size: 24px;
 	}
 
+	body{
+		background: none !important;
+	}
+	
+	.box{
+		border: 1px solid #777 !important;
+		box-shadow: .5px .5px 10px #333 !important;
+	}
+
 	</style>
 	
 	
@@ -67,6 +76,7 @@
 	       </div>
  		</form>
        <a href="" class="pass-forgot">Forgot your password?</a>
+       <a href="${pageContext.request.contextPath}/views/index.jsp" class="pass-forgot">Back</a>
  
     </div>
  

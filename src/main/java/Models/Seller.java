@@ -13,8 +13,15 @@ public class Seller {
 	private int business_id;
 	private String company;
 	private String bname;
+	private int rating;
 	
 	
+	public int getRating() {
+		return rating;
+	}
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
 	public String getBname() {
 		return bname;
 	}

@@ -1,6 +1,7 @@
 package Controllers;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -35,11 +36,16 @@ public class RegisterController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String page = request.getParameter("page");
+		String error = request.getParameter("error");
+		String success = request.getParameter("success");
+		
 		if(page != null) {
 			if(page.equals("sellerForm")) {
 				try {
 					List<Business> businessList = businessDAO.get();
 					request.setAttribute("businesses", businessList);
+					if(error != null) request.setAttribute("error", error);
+					if(success != null) request.setAttribute("success", success);
 					dispatcher = request.getRequestDispatcher("views/seller/form.jsp");
 					dispatcher.forward(request, response);
 				} catch (SQLException e) {
@@ -115,7 +121,8 @@ public class RegisterController extends HttpServlet {
 						response.sendRedirect(request.getContextPath() + "/AdminController?page=dashboard");
 					}
 	        	}else {
-	        		request.setAttribute("error", "Email has already taken");
+	        		String success = "Created product successfully!";
+					String encoded = URLEncoder.encode(success, "UTF-8");
 	        		dispatcher = request.getRequestDispatcher("/views/admin/form.jsp");
 	        		dispatcher.forward(request, response);
 	        	}
@@ -149,7 +156,7 @@ public class RegisterController extends HttpServlet {
 				int business_id = Integer.parseInt(business);
 				
 				// Perform server-side validation
-		        if (isValid(name, email, password, cpassword)) {
+		        if (isValid(name, email, password, cpassword, address, phone, company, business)) {
 		        	
 		        	Seller is_still_exist_email = sellerDAO.getSellerByEmail(email);
 		        	
@@ -173,16 +180,16 @@ public class RegisterController extends HttpServlet {
 							session.setAttribute("seller", retrieveSeller);
 							response.sendRedirect(request.getContextPath() + "/SellerController?page=dashboard");					}
 		        	}else {
-		        		request.setAttribute("error", "Email has already taken");
-		        		dispatcher = request.getRequestDispatcher("/views/seller/form.jsp");
-		        		dispatcher.forward(request, response);
+		        		String error = "Email has already taken!";
+						String encoded = URLEncoder.encode(error, "UTF-8");
+		        		response.sendRedirect(request.getContextPath() + "/RegisterController?page=sellerForm&error="+encoded);
 		        	}
 		        	
 		        } else {
 		            // Set error message and forward back to registration form
-		            request.setAttribute("error", "Passwords do not match");
-		            RequestDispatcher dispatcher = request.getRequestDispatcher("/views/seller/form.jsp");
-		            dispatcher.forward(request, response);
+		        	String error = "Please fill the fields first!";
+					String encoded = URLEncoder.encode(error, "UTF-8");
+	        		response.sendRedirect(request.getContextPath() + "/RegisterController?page=sellerForm&error="+encoded);
 		        }
 	}
 	
@@ -200,7 +207,7 @@ public class RegisterController extends HttpServlet {
 			String phone = request.getParameter("phone");
 			String address = request.getParameter("address");
 			
-			if(isValid(name, email, password, cpassword)) {
+			if(isValid(name, email, password, cpassword, address, phone)) {
 				
 				Customer is_still_exist_email = customerDAO.getUserByEmail(email);
 				
@@ -227,7 +234,7 @@ public class RegisterController extends HttpServlet {
 	        		dispatcher.forward(request, response);
 				}
 			}else {
-				request.setAttribute("error", "Passwords do not match");
+				request.setAttribute("error", "Fill out all the fields");
 				dispatcher = request.getRequestDispatcher("/views/user/form.jsp");
 				dispatcher.forward(request, response);
 			}
@@ -237,6 +244,15 @@ public class RegisterController extends HttpServlet {
 		// custom validation
 	private boolean isValid(String name, String email, String password, String cpassword) {
 		return !name.equals("") && !email.equals("")  && password.equals(cpassword);
+	}
+	
+	private boolean isValid(String name, String email, String password, String cpassword, String address, String phone) {
+		return !name.equals("") && !email.equals("")  && password.equals(cpassword) && !address.equals("") && !phone.equals("");
+	}
+	
+	private boolean isValid(String name, String email, String password, String cpassword, String address, String phone, String company, String business) {
+		return !name.equals("") && !email.equals("")  && password.equals(cpassword) && !address.equals("") 
+				&& !phone.equals("") && !company.equals("") && !business.equals("");
 	}
 
 }

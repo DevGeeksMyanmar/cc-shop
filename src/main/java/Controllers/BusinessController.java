@@ -61,6 +61,16 @@ public class BusinessController extends HttpServlet {
 	private void saveBusiness(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 		boolean flag = false;
 		String name = request.getParameter("name");
+		
+		Business is_duplicated = businessDAO.getByName(name);
+		
+		if(is_duplicated != null) {
+			String error = "Name has already taken";
+			String encoded = URLEncoder.encode(error, "UTF-8");
+			response.sendRedirect(request.getContextPath() + "/AdminController?page=business&error="+encoded);
+			return;
+		}
+		
 		Business newBusiness = new Business();
 		newBusiness.setName(name);
 		
@@ -75,6 +85,16 @@ public class BusinessController extends HttpServlet {
 		private void updateBusiness(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 			String name = request.getParameter("name");
 			String business_id = request.getParameter("business_id");
+			
+			Business is_duplicated = businessDAO.getByName(name);
+			
+			if(is_duplicated != null && is_duplicated.getId() != Integer.parseInt(business_id)) {
+				String error = "Name has already taken";
+				String encoded = URLEncoder.encode(error, "UTF-8");
+				response.sendRedirect(request.getContextPath() + "/AdminController?page=business&error="+encoded);
+				return;
+			}
+			
 			Business updatedBusiness = new Business();
 			updatedBusiness.setName(name);
 			if(businessDAO.update(updatedBusiness, Integer.parseInt(business_id))) {
