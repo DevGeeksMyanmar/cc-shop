@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+  <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -22,7 +22,7 @@
 					<table class="table">
 					  <thead class="bg-primary text-light" >
 					    <tr>
-					      <th scope="col" style="color: white" >Order_id</th>
+					      <th scope="col" style="color: white" >Order_code</th>
 					      <th scope="col" style="color: white">Order_name</th>
 					      <th scope="col" style="color: white">Count</th>
 					      <th scope="col" style="color: white">Price</th>
@@ -30,20 +30,18 @@
 					    </tr>
 					  </thead>
 					  <tbody>
-					    <tr>
-					      <td>1</td>
-					      <td>Apple</td>
-					      <td>1</td>
-					      <td>$100</td>
-					      <td class="text-danger">Pending</td>
-					    </tr>
-					    <tr>
-					      <td>2</td>
-					      <td>ICE</td>
-					      <td>20</td>
-					      <td>$300</td>
-					      <td class="text-success">Done</td>
-					    </tr>
+					  <c:forEach items ="${orders}" var="order">
+						    <tr>
+						      <td>${order.order_code}</td>
+						      <td>${order.order_name}</td>
+						      <td>${order.count}</td>
+						      <td>${order.price}</td>
+						     <c:if test="${order.status==0}">
+						     	<td class="text-danger">Pending</td>
+						     </c:if>
+						     <td class="text-success">Done</td>
+						    </tr>
+					   </c:forEach>
 					  </tbody>
 					</table>         
 		        </div>

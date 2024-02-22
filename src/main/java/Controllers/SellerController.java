@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,6 +27,8 @@ import DAO.CategoryDAO;
 import Models.Seller;
 import Models.Business;
 import Models.Category;
+import Models.Order;
+import Models.Record;
 
 import java.util.*;
 
@@ -71,16 +71,20 @@ public class SellerController extends HttpServlet {
     				break;
     			
     			case "order":
+    				List<Order> order = new ArrayList<Order>();
+    				order = sellerDAO.getAllOrder();
 					dispatcher = request.getRequestDispatcher("/views/seller/order/order.jsp");
 					dispatcher.forward(request, response);
 					break;
 			
     			case "history":
+    				List<Record> rc = new ArrayList<Record>();
+    				rc = sellerDAO.getAllRecords();
 		    		dispatcher = request.getRequestDispatcher("/views/seller/history/history.jsp");
 					dispatcher.forward(request, response);
 					break;
 					
-    			case "createProductPage":
+    			case "create":
     				try {
 						List<Category> categories = categoryDAO.get();
 						request.setAttribute("categories", categories);
