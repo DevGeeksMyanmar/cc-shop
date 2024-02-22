@@ -35,30 +35,20 @@
 					    </tr>
 					  </thead>
 					  <tbody>
+					  <c:forEach items="${Record}" var="record">
 					    <tr>
-					      <td>1</td>
-					      <td>$100</td>
-					      <td>1001</td>
-					      <td>321</td>
-					      <td>1</td>
-					      <td>1</td>
-					      <td>1234</td>
-					      <td>50</td>
+					      <td>${Record.id}</td>
+					      <td>${Record.price}</td>
+					      <td>${Record.order_code}</td>
+					      <td>${Record.count}</td>
+					      <td>${Record.product_id}</td>
+					      <td>${Record.customer_id}</td>
+					      <td>${Record.shipping_id}</td>
+					      <td>${Record.seller_id}</td>
 					      <td>1.1.2021</td>
 					      <td>31.1.2024</td>
 					    </tr>
-					    <tr>
-						     <td>1</td>
-					      <td>$100</td>
-					      <td>1001</td>
-					      <td>321</td>
-					      <td>1</td>
-					      <td>1</td>
-					      <td>1234</td>
-					      <td>50</td>
-					      <td>1.1.2021</td>
-					      <td>31.1.2024</td>
-					    </tr>
+					    </c:forEach>
 					  </tbody>
 					</table>         
 		        </div>

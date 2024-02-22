@@ -35,9 +35,15 @@ import DAO.ProductDAO;
 import Models.Seller;
 import Models.Business;
 import Models.Category;
+
+// this is acceptable
+import Models.Order;
+import Models.Record;
+
 import Models.Customer;
 import Models.Product;
 import Models.Image;
+
 
 import java.util.*;
 
@@ -90,17 +96,19 @@ public class SellerController extends HttpServlet {
     				break;
     			
     			case "order":
+    				List<Order> order = new ArrayList<Order>();
+    				order = sellerDAO.getAllOrder();
 					dispatcher = request.getRequestDispatcher("/views/seller/order/order.jsp");
 					dispatcher.forward(request, response);
 					break;
 			
     			case "history":
+    				List<Record> rc = new ArrayList<Record>();
+    				rc = sellerDAO.getAllRecords();
 		    		dispatcher = request.getRequestDispatcher("/views/seller/history/history.jsp");
 					dispatcher.forward(request, response);
 					break;
 					
-    			
-
     			}
     		}
     	}else {

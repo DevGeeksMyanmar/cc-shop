@@ -2,7 +2,11 @@ package DAO;
 
 import java.sql.*;
 import java.util.*;
+
+import org.apache.tomcat.jdbc.pool.interceptor.AbstractCreateStatementInterceptor;
+
 import Models.*;
+import Models.Record;
 
 public class SellerDAO {
 	
@@ -248,6 +252,56 @@ public class SellerDAO {
 			System.out.println("--------------------------");
 		}
 	}
-
+	
+//	get all order
+	public List<Order> getAllOrder(){
+		List<Order> orders = new ArrayList<Order>();
+		String query = "SELECT * From Order";
+		try {
+			statement = con.createStatement();
+			ResultSet resultSet = statement.executeQuery(query);
+			while(resultSet.next()) {
+				Order order = new Order();
+				order.setId(resultSet.getInt("id"));
+				order.setOrder_code(resultSet.getString("order_code"));
+				order.setPrice(resultSet.getInt("price"));
+				order.setCount(resultSet.getInt("count"));
+				order.setStatus(resultSet.getInt("status"));
+				order.setProduct_id(resultSet.getInt("produt_id"));
+				order.setCustomer_id(resultSet.getInt("customer_id"));
+				order.setShipping_id(resultSet.getInt("shipping_id"));
+				orders.add(order);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return orders;
+	}
+//get all records
+	public List<Record> getAllRecords(){
+		List<Record> records = new ArrayList<Record>();
+		String query = "SELECT * FROM records";
+		try {
+			statement = con.createStatement();
+			ResultSet rs = statement.executeQuery(query);
+			while(rs.next()) {
+				Record record = new Record();
+				record.setId(rs.getInt("id"));
+				record.setPrice(rs.getInt("price"));
+				record.setOrder_code(rs.getString("order_code"));
+				record.setCount(rs.getInt("count"));
+				record.setProduct_id(rs.getInt("product_id"));
+				record.setCustomer_id(rs.getInt("customer_id"));
+				record.setShipping_id(rs.getInt("shipping_id"));
+				record.setSeller_id(rs.getInt("seller_id"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return records;
+	}
 	
 }
