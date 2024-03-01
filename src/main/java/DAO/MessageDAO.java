@@ -37,6 +37,7 @@ public class MessageDAO {
 				mes.setEmail(resultSet.getString("email"));
 				mes.setPhone(resultSet.getString("phone"));
 				mes.setMessage(resultSet.getString("message"));
+				mes.setCreatedAt(resultSet.getString("created_at"));
 				mes.setUpdatedAt(resultSet.getString("updated_at"));
 				messages.add(mes);
 			}

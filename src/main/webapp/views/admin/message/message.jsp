@@ -6,6 +6,8 @@
     
     <%@ include file="../layout/header.jsp" %>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+ 
 
 	<div class="wrapper">
 	
@@ -38,10 +40,40 @@
 						</div>
 						</c:if>
 						
-
-                        <!-- Table  -->
+						<c:forEach items="${messages}" var="mes">
+                        <div class="card col-10">
+                        
+                        <div class="card-body"> 
+                        
                         <div class="row">
-								<table class="table">
+                        
+                        <div class="col-2 d-flex justify-content-center align-items-center"><i class=" fs-1 fa-solid fa-user mx-2"></i></div>
+                        
+                        <div class="col-8">
+                        
+                        <h3 class="fs-5 fw-bold card-title">${mes.name}</h3>
+						
+						<h5 class="card-title fs-6">${mes.email} | ${mes.phone}</h5>
+						<hr class="text-danger">
+						<h5 class="card-title fs-6">Message:</h5>
+						
+                        <p class="card-title fs-5">${mes.message}</p>  
+                        
+                        </div> 
+                        
+                        <div class="col-2"><h5 class="card-title fs-6">${mes.createdAt}</h5></div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-end gap-2">
+                        	<button class="btn btn-primary">Send Message</button> 
+                            <button class="btn btn-danger">Delete</button>  
+                        </div>
+                                      
+                        </div>
+                        </div>
+                        </c:forEach>
+                        
+								<!--<table class="table">
 								
 								<thead class="thead-dark col-12">
 								<tr>
@@ -51,7 +83,7 @@
 								<th class="col-4">Message</th>
 								</tr>
 								</thead>
-								<c:forEach items="${messages}" var="message">
+								
 								<tbody>
 								
 								<tr>
@@ -61,9 +93,9 @@
 								<td>${message.message}</td>
 								</tr>					
 								</tbody>
-								</c:forEach>							
-								</table>
-						</div>
+															
+								</table>-->
+
 
 						
 
