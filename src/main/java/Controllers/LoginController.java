@@ -152,7 +152,7 @@ public class LoginController extends HttpServlet {
 		if(admin != null) {
 			if(Hash.verifyPassword(password, admin.getPassword())) {
 				session.setAttribute("admin", admin);
-				response.sendRedirect(request.getContextPath() + "/AdminController?page=dashboard");
+				response.sendRedirect(request.getContextPath() + "/AdminController?page=dashboard&filter_value=today");
 			}else {
 				request.setAttribute("error", "Password was wrong!");
 	            RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/form.jsp");

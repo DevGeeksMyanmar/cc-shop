@@ -27,7 +27,7 @@
 					</div>
 					<ul class="nav">
 						<li class="nav-item ${param.page == 'dashboard' ? 'active' : ''}">
-							<a href="${pageContext.request.contextPath}/AdminController?page=dashboard">
+							<a href="${pageContext.request.contextPath}/AdminController?page=dashboard&filter_value=today">
 								<i class="la la-dashboard"></i>
 								<p>Dashboard</p>
 							</a>
@@ -35,7 +35,7 @@
 						<li class="nav-item ${param.page == 'user' ? 'active' : ''}">
 							<a href="${pageContext.request.contextPath}/AdminController?page=user">
 								<i class="la la-user"></i>
-								<p>Users</p>
+								<p>Customers</p>
 								<span class="badge badge-count">${counts.user_count}</span>
 							</a>
 						</li>
@@ -49,7 +49,7 @@
                         <li class="nav-item ${param.page == 'store' ? 'active' : ''}">
 							<a href="${pageContext.request.contextPath}/AdminController?page=store">
 								<i class="las la-store"></i>
-								<p>Store</p>
+								<p>Company</p>
 								<span class="badge badge-count">${counts.store_count}</span>
 							</a>
 						</li>
@@ -63,14 +63,14 @@
 						<li class="nav-item ${param.page == 'category' ? 'active' : ''}">
 							<a href="${pageContext.request.contextPath}/AdminController?page=category">
 								<i class="las la-clipboard-list"></i>
-								<p>Category</p>
+								<p>Product Category</p>
 								<span class="badge badge-count">${counts.category_count}</span>
 							</a>
 						</li>
 						<li class="nav-item ${param.page == 'business' ? 'active' : ''}">
 							<a href="${pageContext.request.contextPath}/AdminController?page=business">
 								<i class="las la-building"></i>
-								<p>Business</p>
+								<p>Business Type</p>
 								<span class="badge badge-count">${counts.business_count}</span>
 							</a>
 						</li>

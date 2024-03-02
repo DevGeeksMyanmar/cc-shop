@@ -46,11 +46,15 @@ public class RegisterController extends HttpServlet {
 					request.setAttribute("businesses", businessList);
 					if(error != null) request.setAttribute("error", error);
 					if(success != null) request.setAttribute("success", success);
-					dispatcher = request.getRequestDispatcher("views/seller/form.jsp");
+					dispatcher = request.getRequestDispatcher("views/seller/register.jsp");
 					dispatcher.forward(request, response);
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
+			}
+			
+			if(page.equals("userRegisterPage")) {
+				request.getRequestDispatcher("views/user/register.jsp").forward(request, response);
 			}
 		}
 	}
@@ -118,18 +122,18 @@ public class RegisterController extends HttpServlet {
 					if(flag) {  // if flag true, then go dashboard.
 						Admin retrieveAdmin = adminDAO.getAdminByEmail(email);
 						session.setAttribute("admin", retrieveAdmin);
-						response.sendRedirect(request.getContextPath() + "/AdminController?page=dashboard");
+						response.sendRedirect(request.getContextPath() + "/AdminController?page=dashboard&filter_value=today");
 					}
 	        	}else {
-	        		String success = "Created product successfully!";
-					String encoded = URLEncoder.encode(success, "UTF-8");
-	        		dispatcher = request.getRequestDispatcher("/views/admin/form.jsp");
+	        		String error = "Account alreay taken";
+					request.setAttribute("error", error);
+	        		dispatcher = request.getRequestDispatcher("/views/admin/register.jsp");
 	        		dispatcher.forward(request, response);
 	        	}
 	        } else {
 	            // Set error message and forward back to registration form
 	            request.setAttribute("error", "Passwords do not match");
-	            RequestDispatcher dispatcher = request.getRequestDispatcher("/RegisterController?page=sellerForm");
+	            RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/register.jsp");
 	            dispatcher.forward(request, response);
 	        }
 
@@ -153,10 +157,10 @@ public class RegisterController extends HttpServlet {
 				String company = request.getParameter("company");
 				String business = request.getParameter("business");
 				String address = request.getParameter("address");
-				int business_id = Integer.parseInt(business);
 				
 				// Perform server-side validation
 		        if (isValid(name, email, password, cpassword, address, phone, company, business)) {
+		        	int business_id = Integer.parseInt(business);
 		        	
 		        	Seller is_still_exist_email = sellerDAO.getSellerByEmail(email);
 		        	
@@ -230,12 +234,12 @@ public class RegisterController extends HttpServlet {
 					}
 				}else {
 					request.setAttribute("error", "Email has already taken");
-	        		dispatcher = request.getRequestDispatcher("/views/user/form.jsp");
+	        		dispatcher = request.getRequestDispatcher("/views/user/register.jsp");
 	        		dispatcher.forward(request, response);
 				}
 			}else {
 				request.setAttribute("error", "Fill out all the fields");
-				dispatcher = request.getRequestDispatcher("/views/user/form.jsp");
+				dispatcher = request.getRequestDispatcher("/views/user/register.jsp");
 				dispatcher.forward(request, response);
 			}
 			

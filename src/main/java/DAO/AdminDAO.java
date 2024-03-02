@@ -160,7 +160,7 @@ public class AdminDAO {
 	// update admin
 	public boolean update(Admin admin) throws SQLException {
 		boolean flag = false;
-		String query = "UPDATE admin SET name=? , email=?, phone=? WHERE id=?";
+		String query = "UPDATE admin SET name=? , email=?, phone=?, updated_at = current_timestamp WHERE id=?";
 		stmt = con.prepareStatement(query);
 		stmt.setString(1, admin.getName());
 		stmt.setString(2, admin.getEmail());
@@ -174,7 +174,7 @@ public class AdminDAO {
 	// update password
 	public boolean updatePassword(String password, int id) throws SQLException {
 		boolean flag = false;
-		String query = "UPDATE admin SET password=? WHERE id=?";
+		String query = "UPDATE admin SET password=?, updated_at = current_timestamp WHERE id=?";
 		stmt = con.prepareStatement(query);
 		stmt.setString(1, password);
 		stmt.setInt(2, id);
@@ -186,7 +186,7 @@ public class AdminDAO {
 	// update image
 		public boolean updateImage(Admin admin) throws SQLException {
 			boolean flag = false;
-			String query = "UPDATE admin SET image=? WHERE id=?";
+			String query = "UPDATE admin SET image=?, updated_at = current_timestamp WHERE id=?";
 			stmt = con.prepareStatement(query);
 			stmt.setString(1, admin.getImage());
 			stmt.setInt(2, admin.getId());

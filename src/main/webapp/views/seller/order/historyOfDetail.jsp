@@ -22,8 +22,8 @@
 	}
 </style>
 
-<body>
-	<div class="wrapper bg-light">
+<body class=" bg-light">
+	<div class="wrapper">
 	
 							<c:if test="${not empty error}">
 								<div class="alert alert-danger text-center" role="alert" id="errorAlert">
@@ -85,6 +85,25 @@
 							</div>
 						</div>
 					</div>
+				</div>
+				
+				<!-- notes -->
+				<div class="card shadow rounded">
+					<div class="card-header">
+						<h5  class="w-bold text-primary"><i class="las la-file"></i> Note</h5>
+					</div>
+					<c:choose>
+						<c:when test="${note != null }">
+							<div class="card-body">
+								<p>${note.text }</p>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="card-body">
+								<p>No note for this order</p>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			
 				<a class="btn btn-primary " href="${pageContext.request.contextPath}/SellerController?page=history&seller_id=${seller.id}">Understand</a>

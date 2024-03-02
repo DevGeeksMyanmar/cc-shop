@@ -11,9 +11,28 @@ public class Orders {
 	private int product_id;
 	private int customer_id;
 	private int shipping_id;
+	private String image_name;
 	private String created_at;
 	private String updated_at;
+	private String customer_name;
+	private String product_name;
+	private int seller_id;
 	
+	public int getSeller_id() {
+		return seller_id;
+	}
+	public void setSeller_id(int seller_id) {
+		this.seller_id = seller_id;
+	}
+
+	
+	public String getImage_name() {
+		return image_name;
+	}
+	public void setImage_name(String image_name) {
+		this.image_name = image_name;
+	}
+
 	public String getCreated_at() {
 		return created_at;
 	}
@@ -40,8 +59,7 @@ public class Orders {
 	public void setProduct_name(String product_name) {
 		this.product_name = product_name;
 	}
-	private String customer_name;
-	private String product_name;
+
 	
 	
 	// and then generated getter and setter 

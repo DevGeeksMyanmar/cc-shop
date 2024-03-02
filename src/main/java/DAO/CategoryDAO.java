@@ -116,7 +116,7 @@ public class CategoryDAO {
 	// update category
 	public boolean update(Category category, int id) throws SQLException {
 		boolean flag = false;
-		String query = "UPDATE categories SET name=? WHERE id=?";
+		String query = "UPDATE categories SET name=?, updated_at = current_timestamp WHERE id=?";
 		stmt = con.prepareStatement(query);
 		stmt.setString(1, category.getName());
 		stmt.setInt(2, id);

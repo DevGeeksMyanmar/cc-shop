@@ -118,6 +118,23 @@ public class CustomerDAO {
 		return customer;
 	}
 	
+	// get customer email by id
+	public String getEamilByID(int id) {
+		String email = null;
+		String query = "SELECT * FROM customers WHERE id = " + id;
+		try {
+			statement = con.createStatement();
+			resultset = statement.executeQuery(query);
+			if(resultset.next()) {
+				email = resultset.getString("email");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return email;
+	}
+	
 	// create new customer
 	public boolean create(Customer customer) throws SQLException {
 		boolean flag = false;
@@ -168,7 +185,7 @@ public class CustomerDAO {
 	// update customer
 	public boolean update(Customer customer) throws SQLException {
 		boolean flag = false;
-		String query = "UPDATE customers SET name=?, email=?, phone=?, address=? WHERE id=?";
+		String query = "UPDATE customers SET name=?, email=?, phone=?, address=?, updated_at = current_timestamp WHERE id=?";
 		stmt = con.prepareStatement(query);
 		stmt.setString(1, customer.getName());
 		stmt.setString(2, customer.getEmail());

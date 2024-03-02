@@ -209,7 +209,7 @@ public class CartDAO {
 	// update item count
 	public boolean update(int cart_id, int change) {
 		boolean flag = false;
-		String query = "UPDATE carts SET count = ? WHERE id = ?";
+		String query = "UPDATE carts SET count = ?, updated_at = current_timestamp WHERE id = ?";
 		try {
 			pst = con.prepareStatement(query);
 			pst.setInt(1, change);

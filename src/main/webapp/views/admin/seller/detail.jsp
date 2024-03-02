@@ -70,7 +70,7 @@
 	                            						<img src="assets/images/troll.jpg" width="130px" class="border rounded p-2">
 	                            					</c:if>
 	                            					<c:if test="${not empty seller.image }">
-	                            						<img src="${seller.image}" width="130px" class="border rounded p-2">
+	                            						<img src="${pageContext.request.contextPath}/assets/images/seller/${seller.image}" width="130px" class="border rounded p-2">
 	                            					</c:if>
 	                            					<br>
 	                            					<br>

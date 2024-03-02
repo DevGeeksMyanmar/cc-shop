@@ -61,10 +61,9 @@ public class SellerController extends HttpServlet {
     	
     	Seller seller = (Seller) session.getAttribute("seller");
     	int seller_id  = seller.getId();
-    	if(seller != null) {
-    		
+
+    	
     		request.setAttribute("seller", seller);
-    		
     		if(page != null) {
     			switch(page) {
     			
@@ -111,9 +110,7 @@ public class SellerController extends HttpServlet {
     				break;
     			}
     		}
-    	}else {
-    		response.sendRedirect("RegisterController?page=sellerForm");
-    	}
+    	
     }
     
     

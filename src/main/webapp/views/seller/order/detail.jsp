@@ -22,8 +22,8 @@
 	}
 </style>
 
-<body>
-	<div class="wrapper bg-light">
+<body class="bg-light">
+	<div class="wrapper ">
 	
 							<c:if test="${not empty error}">
 								<div class="alert alert-danger text-center" role="alert" id="errorAlert">
@@ -31,13 +31,13 @@
 								</div>
 							</c:if>
 
-        <div class="row d-flex align-items-center justify-content-around py-4">
+        <div class="row d-flex align-items-center justify-content-center mt-5">
         	
-			<div class="col-md-6 flex-column d-flex align-items-center justify-content-center px-3">
+			<div class="col-md-6 flex-column d-flex align-items-center justify-content-center mt-4">
 			
 				<div class="card shadow rounded">
 					<div class="card-header">
-						<h5  class="text-muted fw-bold"><i class="las la-map"></i> Shipping Address</h5>
+						<h5  class="text-primary fw-bold"><i class="las la-map"></i> Shipping Address</h5>
 					</div>
 					<div class="card-body">
 						<h6>${address.street_address}, ${address.state}, ${address.city}, ${address.country}</h6>
@@ -45,6 +45,30 @@
 						<span class="text-secondary fw-bold">Date : ${orders[0].updated_at}</span>
 					</div>
 				</div>
+				
+				<!-- notes -->
+				<div class="card shadow rounded">
+					<div class="card-header">
+						<h5  class="w-bold text-primary"><i class="las la-file"></i> Note</h5>
+					</div>
+					<c:choose>
+						<c:when test="${note != null }">
+							<div class="card-body">
+								<p>${note.text }</p>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="card-body">
+								<p>No note for this order</p>
+							</div>
+						</c:otherwise>
+					</c:choose>
+				</div>
+				
+				<a class="btn btn-primary " href="${pageContext.request.contextPath}/SellerController?page=order&seller_id=${seller.id}">Understand</a>
+			</div>
+			
+			<div class="row d-flex align-items-center justify-content-start ">
 			
 				<div class="card shadow rounded">
 					<div class="card-header">
@@ -82,10 +106,7 @@
 						</div>
 					</div>
 				</div>
-			
-				<a class="btn btn-primary " href="${pageContext.request.contextPath}/SellerController?page=order&seller_id=${seller.id}">Understand</a>
-			</div>
-			
+			</div>			
 		</div>
         
 

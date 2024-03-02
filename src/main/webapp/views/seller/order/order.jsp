@@ -14,6 +14,28 @@
 		width: 100% !important;
 		overflow: scroll !important;
 	}
+	#loading-wrapper{
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 100%;
+			height: 100vh;
+			overflow: hidden;
+			z-index: 100;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		#loading{
+			border: none;
+			box-shadow: 1px 1px 5px #ccc;
+			border-radius: 10px;
+			z-index: 100;
+			width: 60px;
+		}
+		.d-none{
+			display: none !important;
+		}
 </style>
 
 	<div class="wrapper">
@@ -25,6 +47,13 @@
 		<%@ include file="/views/seller/layout/sidebar.jsp" %>
 		<!-- ### End of sidebar -->
 	</div>
+	
+						<!-- loading  -->
+						<div id="loading-wrapper" class="d-none">
+							<img src="${pageContext.request.contextPath}/assets/loading.gif" id="loading">
+						</div>
+						<!-- end of loading -->
+	
 	<div class="main-panel">
 		<div class="content">
 			<div class="container-fluid">
@@ -95,8 +124,8 @@
 						      <td>${order.count} </td>
 						      <td class="fw-bold text-primary">${order.count * order.price } MMKs</td>
 						      <td>
-						      	<a href="${pageContext.request.contextPath}/OrderController?page=delete&seller_id=${seller.id}&order_code=${order.order_code}&product_id=${order.product_id}" class="btn btn-sm btn-danger mb-1">Call off</a>
-						      	<a href="${pageContext.request.contextPath}/OrderController?page=transfer&seller_id=${seller.id}&order_code=${order.order_code}&product_id=${order.product_id}" class="btn btn-sm btn-success">Transfer to warehouse</a>
+						      	<a href="${pageContext.request.contextPath}/OrderController?page=delete&seller_id=${seller.id}&order_code=${order.order_code}&product_id=${order.product_id}" id="call-off" class="btn btn-sm btn-danger mb-1">Call off</a>
+						      	<a href="${pageContext.request.contextPath}/OrderController?page=transfer&seller_id=${seller.id}&order_code=${order.order_code}&product_id=${order.product_id}" id="send-to" class="btn btn-sm btn-success">Transfer to Headquarter</a>
 						      </td>
 						      <td>${order.updated_at}</td>
 						      <td class="text-warning">
@@ -114,4 +143,22 @@
     		</div>             
 		</div>			
 	</div>
+	
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			console.log("document is ready")
+	
+		    $("#call-off").click(function(event) {
+		        console.log("clicked");
+		        $("#loading-wrapper").removeClass("d-none");
+		    });
+		    
+		    $("#send-to").click(function(event) {
+		        console.log("clicked");
+		        $("#loading-wrapper").removeClass("d-none");
+		    });
+		});
+	</script>
+	
 <%@ include file="/views/seller/layout/footer.jsp"%>

@@ -66,7 +66,7 @@
 						</nav>
 
 
-						<span class="fw-bold">Total Order: ${total_order}</span>
+						<span class="fw-bold">Complete Order: ${orders.size()}</span>
 
 				</div>
 										

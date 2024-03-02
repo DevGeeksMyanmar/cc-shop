@@ -114,7 +114,7 @@ public class ProductDAO {
 	// update product
 	public boolean updateProductContent(Product product) throws SQLException {
 		boolean flag = false;
-		String query = "UPDATE products SET name=?, price=?, description=?, count=?, category_id=? WHERE id=?";
+		String query = "UPDATE products SET name=?, price=?, description=?, count=?, category_id=?, updated_at = current_timestamp WHERE id=?";
 		stmt = con.prepareStatement(query);
 		stmt.setString(1, product.getName());
 		stmt.setInt(2, product.getPrice());
@@ -125,6 +125,22 @@ public class ProductDAO {
 		int updatedRow = stmt.executeUpdate();
 		if(updatedRow > 0) flag = true;
 		return flag;
+	}
+	
+	// get seller id by product_id
+	public int getSellerIDByProductID(int product_id) {
+		int seller_id = 0;
+		String query = "SELECT seller_id FROM products WHERE product_id = " + product_id;
+		try {
+			statement = con.createStatement();
+			resultSet = statement.executeQuery(query);
+			if(resultSet.next()) {
+				seller_id = resultSet.getInt("seller_id");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return seller_id;
 	}
 	
 	// create product image

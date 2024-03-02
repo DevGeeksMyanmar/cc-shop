@@ -309,6 +309,7 @@ public class AdminController extends HttpServlet {
     				} catch (ServletException | IOException | SQLException e) {
     					e.printStackTrace();
     				} 
+        			break;
         		case "product": // product page in admin panel
         			try {
     					getAllProduct(request, response); // get all product
@@ -365,18 +366,32 @@ public class AdminController extends HttpServlet {
     // dashboard page
     private void dashboard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	Map<String, Integer> counts = null;
+    	List<Orders>  orders = null;
+    	String filter_value = request.getParameter("filter_value");
+    	int page_number = 1;
+        int recordsPerPage = 5;
 		try {
 			// get all count for sidebar
 			counts = getAllCount();
-			
-			// get all order count where status = 1
-			
-			// get all customer count
-			
-			// get all seller count
-			
-			// get all prdouct count
-			List<Orders> orders = orderDAO.getOrderWithStatusOne();
+	        request.setAttribute("counts", counts);
+	        if (request.getParameter("page_number") != null) {
+	        	page_number = Integer.parseInt(request.getParameter("page_number")); 
+	        }
+	        // filter value is null
+	        if(filter_value == null) {
+	        	orders = orderDAO.getOrderWithStatusOne((page_number - 1) * recordsPerPage, recordsPerPage, "all");
+	        }else {
+	        	orders = orderDAO.getOrderWithStatusOne((page_number - 1) * recordsPerPage, recordsPerPage, filter_value);
+	        }
+	        int noOfRecords = orderDAO.getNoOfRecords();
+	        int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+	       
+	        String success = request.getParameter("success");
+	        String error = request.getParameter("error");
+	        if(error != null) request.setAttribute("error", error);
+	        if(success != null) request.setAttribute("success", success);
+	        request.setAttribute("noOfPages", noOfPages);
+	        request.setAttribute("currentPage", page_number);
 			
 			request.setAttribute("orders", orders);
 			request.setAttribute("counts", counts);
@@ -482,6 +497,7 @@ public class AdminController extends HttpServlet {
         request.setAttribute("currentPage", page_number);
         dispatcher = request.getRequestDispatcher("views/admin/product/list.jsp"); 
         dispatcher.forward(request, response);
+        return;
 	}
 	
 	// get all store
