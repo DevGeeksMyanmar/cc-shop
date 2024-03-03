@@ -162,60 +162,6 @@
 
                 <!-- Single Featured Property -->
                 <div class="col-12 col-md-6 col-xl-4">
-                    <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="300ms">
-                        <!-- Property Thumbnail -->
-                        <div class="property-thumb">
-                            <img src="${pageContext.request.contextPath}/assets/landing/img/feature-img/feature-3.jpg" alt="">
-                        </div>
-                        <!-- Property Content -->
-                        <div class="property-content">
-                            <h5>Online Payment</h5>
-                            <p class="location">Fast & Flexible</p>
-                            <p>Trust in our robust systems for worry-free transactions</p>
-                            <div class="property-meta-data d-flex align-items-end justify-content-between">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Featured Property -->
-                <div class="col-12 col-md-6 col-xl-4">
-                    <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="400ms">
-                        <!-- Property Thumbnail -->
-                        <div class="property-thumb">
-                            <img src="${pageContext.request.contextPath}/assets/landing/img/feature-img/feature-4.jpg" alt="">
-                        </div>
-                        <!-- Property Content -->
-                        <div class="property-content">
-                            <h5>Fast Delivery</h5>
-                            <p class="location">Within few days</p>
-                            <p>Swift delivery guaranteed : Experience speed and reliability in every order.</p>
-                            <div class="property-meta-data d-flex align-items-end justify-content-between">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Featured Property -->
-                <div class="col-12 col-md-6 col-xl-4">
-                    <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="500ms">
-                        <!-- Property Thumbnail -->
-                        <div class="property-thumb">
-                            <img src="${pageContext.request.contextPath}/assets/landing/img/feature-img/feature-5.jpg" alt="">
-                        </div>
-                        <!-- Property Content -->
-                        <div class="property-content">
-                            <h5>Quality not Quantity</h5>
-                            <p class="location">World-Class Goods</p>
-                            <p>Uncompromising quality : Discover excellence in every product we offer.</p>
-                            <div class="property-meta-data d-flex align-items-end justify-content-between">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Featured Property -->
-                <div class="col-12 col-md-6 col-xl-4">
                     <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="600ms">
                         <!-- Property Thumbnail -->
                         <div class="property-thumb">
@@ -302,7 +248,7 @@
                             </div>
                         </div>
                     </div>
-    
+      
                     <!-- ##### Tabs ##### -->
                     <div class="col-12 col-lg-6">
                         <div class="south-tabs-content">

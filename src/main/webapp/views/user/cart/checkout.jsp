@@ -303,7 +303,7 @@
 		            if (selectedAddressId) {
 		                // Send the selected address ID to the servlet using AJAX
 		                $.ajax({
-		                    url: 'http://localhost:9095/shop-dot-com/CheckoutController?action=order',
+		                    url: 'http://localhost:8080/shop-dot-com/CheckoutController?action=order',
 		                    method: 'POST',
 		                    data: {
 		                        addressId: selectedAddressId,

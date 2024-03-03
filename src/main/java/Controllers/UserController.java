@@ -328,7 +328,7 @@ public class UserController extends HttpServlet {
 		    System.out.println("File Name: " + fileName);
 
 		    //Define destination directory
-	        String uploadDir = "C:\\Users\\acer\\Desktop\\cc-shop\\src\\main\\webapp\\assets\\images\\user"; // Example: "C:/eclipse_workspace/upload"
+	        String uploadDir = "C:\\Users\\Huawei\\git\\cc-shop\\src\\main\\webapp\\assets\\images\\user"; // Example: "C:/eclipse_workspace/upload"
 	        
 	        // Write file to the destination directory
 	        OutputStream out = null;

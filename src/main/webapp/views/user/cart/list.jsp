@@ -232,7 +232,7 @@
 		    function fetchTotalItemsFromServlet(userId) {
 		    	console.log("fetching");
 		        $.ajax({
-		            url: 'http://localhost:9095/shop-dot-com/CartController?action=getTotalItem', // Replace with your servlet URL
+		            url: 'http://localhost:8080/shop-dot-com/CartController?action=getTotalItem', // Replace with your servlet URL
 		            method: 'GET',
 		            data: {
 		                action: 'getTotalItem',
@@ -299,7 +299,7 @@
 		        
 		        // Send AJAX request to update count
 		        $.ajax({
-		            url: "http://localhost:9095/shop-dot-com/CartController?action=updateItemNumber", // Replace with your servlet URL
+		            url: "http://localhost:8080/shop-dot-com/CartController?action=updateItemNumber", // Replace with your servlet URL
 		            method: 'POST',
 		            data: {
 		                user_id: userId,

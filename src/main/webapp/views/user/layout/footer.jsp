@@ -77,7 +77,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'GET',
-            url: 'http://localhost:9095/shop-dot-com/UserController?page=fetch', // Specify the URL of your servlet here
+            url: 'http://localhost:8080/shop-dot-com/UserController?page=fetch', // Specify the URL of your servlet here
             data: {
                 category: category,
                 searchTerm: searchQuery,
@@ -171,7 +171,7 @@ $(document).ready(function() {
     var product_id = $("#product_id").val();
 	    $.ajax({
 	        type: 'GET',
-	        url: "http://localhost:9095/shop-dot-com/CartController?action=validateCount",
+	        url: "http://localhost:8080/shop-dot-com/CartController?action=validateCount",
 	        data: { 
 	            quantity: quantity,
 	            product_Id: product_id
@@ -216,7 +216,7 @@ $(document).ready(function() {
 
         // Send the data to the servlet using AJAX
         $.ajax({
-            url: "http://localhost:9095/shop-dot-com/CartController?action=addToCartFromDetail",
+            url: "http://localhost:8080/shop-dot-com/CartController?action=addToCartFromDetail",
             method: "GET",
             data: {
                 user_id: user_id,

@@ -25,11 +25,6 @@
 				</div>
 		        <div class="row">
 		           <div class="col-md-12">
-<<<<<<< HEAD
-		                
-		
-=======
-		           
 		           			<c:if test="${not empty error}">
 								<div class="alert alert-danger" role="alert" id="errorAlert">
 								 <i class="las la-exclamation-circle"></i> ${error}
@@ -63,7 +58,6 @@
 										</nav> 
 									
 								<c:forEach items="${products}" var="product">
->>>>>>> branch 'main' of https://github.com/DevGeeksMyanmar/cc-shop.git
 		                         <div class="card card-body mt-3">
 		                            <div class="media align-items-center align-items-lg-start text-center text-lg-left flex-column flex-lg-row">
 		                                <div class="mr-2 mb-3 mb-lg-0">
@@ -94,28 +88,17 @@
 		
 		                                </div>
 		                                <div class="mt-3 mt-lg-0 ml-lg-3 text-center">
-<<<<<<< HEAD
-		                                    <h3 class="mb-0 font-weight-semibold">$612.99</h3>		
-		                                    <a href="${pageContext.request.contextPath}/SellerController?page=detailPage" type="button" class="btn btn-primary mt-4 text-white"> Detail</a>
-=======
+		                                    
 		                                	<span class="mt-2">Number of Product: ${product.count}</span>
 		                                    <h4 class="mb-0 font-weight-semibold mt-2">${product.price} MMK</h4>	
 		                                    <a href="${pageContext.request.contextPath}/ProductController?page=detail&product_id=${product.id}&seller_id=${seller.id}" type="button" class="btn btn-info mt-4 text-white"> <i class="las la-exclamation-circle"></i></a>
 		                                    <a href="${pageContext.request.contextPath}/ProductController?page=edit&product_id=${product.id}" class="btn btn-primary mt-4 text-white "> <i class="las la-edit"></i>  </a>
 		                                    <a href="${pageContext.request.contextPath}/ProductController?page=destory&product_id=${product.id}&seller_id=${seller.id}" type="button" class="btn btn-danger mt-4 text-white"> <i class="las la-trash"></i> </a>
->>>>>>> branch 'main' of https://github.com/DevGeeksMyanmar/cc-shop.git
 		                                </div>
 		                            </div>
 		                        </div>
-<<<<<<< HEAD
-		                        
-		                                             
-=======
 		                     </c:forEach>
 		                      
-		                      		             
-		                             
->>>>>>> branch 'main' of https://github.com/DevGeeksMyanmar/cc-shop.git
 		        	</div>                     
 		        </div>
     		</div>   
